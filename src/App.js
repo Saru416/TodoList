@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { configureStore } from '@reduxjs/toolkit'; // Import configureStore from redux toolkit
+import { Provider } from 'react-redux';
+import TaskInput from './components/TaskInput';
+import TaskList from './components/TaskList';
+import rootReducer from './components/reducers';
+import "./App.css"
 
-function App() {
+const store = configureStore({ reducer: rootReducer }); // Pass rootReducer as reducer property
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div>
+        <h1>To-Do List</h1>
+        <div className='Input'>
+          <TaskInput />
+        </div>
+        <div className='List'> 
+          <TaskList />
+        </div>
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;
